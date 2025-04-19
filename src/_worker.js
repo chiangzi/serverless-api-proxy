@@ -44,7 +44,8 @@ async function handleRequest(request) {
   const [prefix, rest] = extractPrefixAndRest(pathname, Object.keys(apiMapping));
   if (prefix) {
     const baseApiUrl = apiMapping[prefix];
-    const targetUrl = `${baseApiUrl}${rest}`;
+    // 保留原始URL的查询参数
+    const targetUrl = `${baseApiUrl}${rest}${url.search}`;
 
     try {
       const newRequest = new Request(targetUrl, {
